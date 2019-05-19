@@ -1,0 +1,9 @@
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Common\bin\Debug\netstandard2.0\BugTracker.Common.deps.json
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Common\bin\Debug\netstandard2.0\BugTracker.Common.dll
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Common\bin\Debug\netstandard2.0\BugTracker.Common.pdb
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Common\obj\Debug\netstandard2.0\BugTracker.Common.csprojAssemblyReference.cache
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Common\obj\Debug\netstandard2.0\BugTracker.Common.csproj.CoreCompileInputs.cache
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Common\obj\Debug\netstandard2.0\BugTracker.Common.AssemblyInfoInputs.cache
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Common\obj\Debug\netstandard2.0\BugTracker.Common.AssemblyInfo.cs
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Common\obj\Debug\netstandard2.0\BugTracker.Common.dll
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Common\obj\Debug\netstandard2.0\BugTracker.Common.pdb

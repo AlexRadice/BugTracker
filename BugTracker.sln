@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugTracker.UI", "BugTracker.UI\BugTracker.UI.csproj", "{D36AC21C-DED6-4D40-BCB0-588A91786086}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugTracker.UI", "BugTracker.UI\BugTracker.UI.csproj", "{D36AC21C-DED6-4D40-BCB0-588A91786086}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugTracker.Data", "BugTracker.Data\BugTracker.Data.csproj", "{031E7864-BE7E-4E13-89D6-F8910DF198FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugTracker.Data.Tests", "BugTracker.Data.Tests\BugTracker.Data.Tests.csproj", "{872445B5-2764-485A-BD48-12D1B9E7115D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugTracker.UI.Tests", "BugTracker.UI.Tests\BugTracker.UI.Tests.csproj", "{134CE268-FB74-403A-8348-19D766B8A54F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugTracker.Common", "BugTracker.Common\BugTracker.Common.csproj", "{6718A16A-9738-4DCA-9780-C39A872174C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{D36AC21C-DED6-4D40-BCB0-588A91786086}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D36AC21C-DED6-4D40-BCB0-588A91786086}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D36AC21C-DED6-4D40-BCB0-588A91786086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031E7864-BE7E-4E13-89D6-F8910DF198FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031E7864-BE7E-4E13-89D6-F8910DF198FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031E7864-BE7E-4E13-89D6-F8910DF198FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031E7864-BE7E-4E13-89D6-F8910DF198FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{872445B5-2764-485A-BD48-12D1B9E7115D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{872445B5-2764-485A-BD48-12D1B9E7115D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{872445B5-2764-485A-BD48-12D1B9E7115D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{872445B5-2764-485A-BD48-12D1B9E7115D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{134CE268-FB74-403A-8348-19D766B8A54F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{134CE268-FB74-403A-8348-19D766B8A54F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{134CE268-FB74-403A-8348-19D766B8A54F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{134CE268-FB74-403A-8348-19D766B8A54F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6718A16A-9738-4DCA-9780-C39A872174C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6718A16A-9738-4DCA-9780-C39A872174C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6718A16A-9738-4DCA-9780-C39A872174C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6718A16A-9738-4DCA-9780-C39A872174C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

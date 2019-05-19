@@ -1,0 +1,16 @@
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\bin\Debug\netstandard2.0\BugTracker.Data.deps.json
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\bin\Debug\netstandard2.0\BugTracker.Data.dll
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\bin\Debug\netstandard2.0\BugTracker.Data.pdb
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\bin\Debug\netstandard2.0\BugTracker.Common.dll
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\bin\Debug\netstandard2.0\BugTracker.Common.pdb
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\obj\Debug\netstandard2.0\BugTracker.Data.csprojAssemblyReference.cache
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\obj\Debug\netstandard2.0\BugTracker.Data.csproj.CoreCompileInputs.cache
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\obj\Debug\netstandard2.0\BugTracker.Data.AssemblyInfoInputs.cache
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\obj\Debug\netstandard2.0\BugTracker.Data.AssemblyInfo.cs
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\obj\Debug\netstandard2.0\BugTracker.Data.csproj.CopyComplete
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\obj\Debug\netstandard2.0\BugTracker.Data.dll
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\obj\Debug\netstandard2.0\BugTracker.Data.pdb
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\bin\Debug\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\bin\Debug\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\bin\Debug\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.Data\bin\Debug\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.xml
