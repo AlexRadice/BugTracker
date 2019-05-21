@@ -140,8 +140,8 @@
                                     title: $title.val(),
                                     description: $description.val()
                                 }),
-                                success: function(jqXhr) {
-                                    bugs.push(jqXhr.responseJson);
+                                success: function(data) {
+                                    bugs.push(data);
                                     refreshTable();
                                 }
                             });
@@ -172,7 +172,7 @@
         <tr><th>#</th><th>Title</th><th>Assigned To</th><th>Status</th><th></th></th></tr>
         </thead>
         <tbody>
-        <td class="table-loading">Loading...</td>
+        <td class="table-loading" colspan="5">Loading...</td>
         </tbody>
     </table>
 

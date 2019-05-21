@@ -3,5 +3,147 @@
     ViewData["Title"] = "Users";
 }
 
+@section Scripts {
+    <script>
+        $(function() {
+            var users = [],
+                editingUser = null,
+                $userstable = $('#userstable'),
+                $editor = $('#editor'),
+                $username;
+
+            var refreshTable = function() {
+                var tbody = $userstable.find('tbody');
+                tbody.empty();
+                tbody.append(users.map(function(user) {
+                    return ('<tr><td class="non-text">' +
+                        user.id +
+                        '</td><td><a class="edituser" href="' +
+                        user.id +
+                        '">' +
+                        user.name +
+                        '</a></td></tr>'
+                    );
+                }));
+            };
+
+            $.getJSON('/api/users',
+                function(data, textStatus, jqXhr) {
+                    users = data;
+                    refreshTable();
+                });
+
+            $editor.dialog({
+                autoOpen: false,
+                maxWidth: 500,
+                width: 500,
+                height: 500
+            });
+            $username = $('#username');
+
+            $('#adduser').on('click keydown',
+                function() {
+                    editingUser = {};
+                    $editor.dialog({ title: 'New user' });
+                    $editor.find('input').val('');
+                    $editor.dialog('open');
+                });
+
+            $userstable.on('click keydown',
+                'a.edituser',
+                function() {
+                    var id = parseInt($(this).attr('href'));
+                    console.log('Editing ' + id);
+                    editingUser = users.filter(function(user) { return user.id === id; })[0];
+                    $editor.dialog({ title: 'Editing user #' + id });
+                    $username.val(editingUser.name);
+                    $editor.dialog('open');
+                    return false;
+                });
+
+            $('#canceledit').on('click keydown',
+                function() {
+                    editingUser = null;
+                    $editor.dialog('close');
+                });
+
+            var saveEditingUser = function(changes) {
+                $.ajax('/api/users',
+                    {
+                        method: 'PUT',
+                        contentType: 'application/json',
+                        dataType: 'text',
+                        data: JSON.stringify({
+                            id: editingUser.id,
+                            name: changes.name
+                        }),
+                        success: function() {
+                            editingUser.name = changes.name;
+                            editingUser = null;
+                            refreshTable();
+                        },
+                        error: function() {
+                            console.log(arguments.join(','));
+                        }
+                    });
+
+            };
+
+            $('#saveuser').on('click keydown',
+                function() {
+                    $editor.dialog('close');
+                    if (editingUser.id) {
+                        saveEditingUser({
+                            name: $username.val()
+                        });
+                    } else {
+                        editingUser = null;
+                        $.ajax('/api/users',
+                            {
+                                method: 'POST',
+                                contentType: 'application/json',
+                                dataType: 'json',
+                                data: JSON.stringify({
+                                    name: $username.val()
+                                }),
+                                success: function(data) {
+                                    users.push(data);
+                                    refreshTable();
+                                }
+                            });
+                    }
+                });
+        });
+    </script>
+}
+
 <h2>Users</h2>
 
+<div class="row">
+    <table id="userstable" class="table table-bordered table-striped">
+        <thead>
+            <tr><th>#</th><th>Name</th></tr>
+        </thead>
+        <tbody>
+        <td class="table-loading" colspan="2">Loading...</td>
+        </tbody>
+    </table>
+
+    <button id="adduser" class="btn btn-default">Add user</button>
+</div>
+<div id="editor" style="display: none; z-index:99">
+    <div class="dialog-container">
+        <form>
+            <div class="row col-5">
+                <div class="form-group">
+                    <label for="title">Name</label>
+                    <input type="text" class="form-control" id="username" placeholder="Name">
+                </div>
+            </div>
+
+            <div class="row col-5">
+                <button id="saveuser" type="button" class="btn btn-default">Save</button> <button id="canceledit" type="button" class="btn">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
