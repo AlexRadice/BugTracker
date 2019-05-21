@@ -12,13 +12,25 @@
                 $title,
                 $description;
 
+            var formatDate = function() {
+                var d = new Date(),
+                    month = '' + (d.getMonth() + 1),
+                    day = '' + d.getDate(),
+                    year = d.getFullYear();
+
+                if (month.length < 2) month = '0' + month;
+                if (day.length < 2) day = '0' + day;
+
+                return [year, month, day].join('-');
+            }
+
             var refreshTable = function() {
                 var tbody = $bugstable.find('tbody');
                 tbody.empty();
                 tbody.append(bugs.filter(function(bug) {
-                     return !bug.dateClosed;
+                    return !bug.dateClosed;
                 }).map(function(bug) {
-                    return ('<td>' +
+                    return ('<tr><td class="non-text">' +
                         bug.id +
                         '</td><td><a class="editbug" href="' +
                         bug.id +
@@ -28,7 +40,9 @@
                         ((bug.assignedToUser && bug.assignedToUser.name) || 'Unassigned') +
                         '</td><td>' +
                         (bug.dateClosed ? 'Closed' : 'Open') +
-                        '</td>'
+                        '</td><td class="non-text"><button class="btn btn-default closebug" data-id="' +
+                        bug.id +
+                        '">Close</button></td></tr>'
                     );
                 }));
             };
@@ -79,30 +93,42 @@
                     $editor.dialog('close');
                 });
 
+            var saveEditingBug = function(changes) {
+                $.ajax('/api/bugs',
+                    {
+                        method: 'PUT',
+                        contentType: 'application/json',
+                        dataType: 'text',
+                        data: JSON.stringify({
+                            id: editingBug.id,
+                            title: changes.title,
+                            description: changes.description,
+                            dateOpened: editingBug.dateOpened,
+                            dateClosed: changes.dateClosed,
+                            assignedToUser: editingBug.assignedToUser
+                        }),
+                        success: function() {
+                            editingBug.title = changes.title;
+                            editingBug.description = changes.description;
+                            editingBug.dateClosed = changes.dateClosed;
+                            editingBug = null;
+                            refreshTable();
+                        },
+                        error: function() {
+                            console.log(arguments.join(','));
+                        }
+                    });
+
+            };
+
             $('#savebug').on('click keydown',
                 function() {
                     $editor.dialog('close');
                     if (editingBug.id) {
-                        $.ajax('/api/bugs',
-                            {
-                                method: 'PUT',
-                                contentType: 'application/json',
-                                dataType: 'json',
-                                data: JSON.stringify({
-                                    id: editingBug.id,
-                                    title: $title.val(),
-                                    description: $description.val(),
-                                    dateOpened: editingBug.dateOpened,
-                                    dateClosed: editingBug.dateClosed,
-                                    assignedToUser: editingBug.assignedToUser
-                                }),
-                                success: function() {
-                                    editingBug.title = $title.val();
-                                    editingBug.description = $description.val();
-                                    editingBug = null;
-                                    refreshTable();
-                                }
-                            });
+                        saveEditingBug({
+                            title: $title.val(),
+                            description: $description.val()
+                        });
                     } else {
                         editingBug = null;
                         $.ajax('/api/bugs',
@@ -120,6 +146,19 @@
                                 }
                             });
                     }
+                });
+
+            $bugstable.on('click keydown',
+                'button.closebug',
+                function() {
+                    var id = parseInt($(this).attr('data-id'));
+                    console.log('Closing ' + id);
+                    editingBug = bugs.filter(function(bug) { return bug.id === id; })[0];
+                    saveEditingBug({
+                        title: editingBug.title,
+                        description: editingBug.description,
+                        dateClosed: formatDate()
+                    });
                 });
         });
     </script>
