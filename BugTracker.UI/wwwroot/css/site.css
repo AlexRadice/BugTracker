@@ -13,7 +13,7 @@ body {
 }
 
 .dialog-container { margin-left: 15px; margin-right: 15px;}
-
+.table-loading { text-align: center; column-span: 5}
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */

@@ -89,7 +89,17 @@ namespace BugTracker.Data
 				command.Parameters.Add(new SqlParameter("@id", SqlDbType.Int) { Value = bug.Id });
 				command.Parameters.Add(new SqlParameter("@title", SqlDbType.NVarChar, 100) { Value = bug.Title });
 				command.Parameters.Add(new SqlParameter("@description", SqlDbType.NVarChar, 4000) { Value = bug.Description });
-				command.Parameters.Add(new SqlParameter("@dateClosed", SqlDbType.DateTime) { Value = bug.DateClosed });
+				if (bug.DateClosed.HasValue)
+				{
+					command.Parameters.Add(new SqlParameter("@dateClosed", SqlDbType.DateTime)
+						{Value = bug.DateClosed});
+				}
+				else
+				{
+					command.Parameters.Add(new SqlParameter("@dateClosed", SqlDbType.DateTime)
+						{ Value = DBNull.Value });
+				}
+
 				if (bug.AssignedToUser == null)
 				{
 					command.Parameters.Add(new SqlParameter("@assignedToUser", SqlDbType.Int) { Value = DBNull.Value });

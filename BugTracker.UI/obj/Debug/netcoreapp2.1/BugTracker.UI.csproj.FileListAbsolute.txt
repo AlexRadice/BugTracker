@@ -31,3 +31,4 @@ C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker
 C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.UI\obj\Debug\netcoreapp2.1\BugTracker.UI.csproj.CopyComplete
 C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.UI\obj\Debug\netcoreapp2.1\BugTracker.UI.dll
 C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.UI\obj\Debug\netcoreapp2.1\BugTracker.UI.pdb
+C:\Users\alex.radice\Documents\Visual Studio 2017\Projects\BugTracker\BugTracker.UI\obj\Debug\netcoreapp2.1\Razor\Views\UsersUi\Index.g.cshtml.cs

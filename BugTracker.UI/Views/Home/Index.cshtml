@@ -4,17 +4,25 @@
 
 @section Scripts {
     <script>
-        $(function () {
+        $(function() {
             var bugs = [],
                 editingBug = null,
-                $bugstable = $('#bugstable');
+                $bugstable = $('#bugstable'),
+                $editor = $('#editor'),
+                $title,
+                $description;
 
-            $.getJSON('/bugs/fetchall').done(function (jqXhr) {
-                bugs = jqXhr.responseJson;
+            var refreshTable = function() {
                 var tbody = $bugstable.find('tbody');
                 tbody.empty();
-                tbody.append(bugs.map(function (bug) {
-                    return ('<td><a href="#">' +
+                tbody.append(bugs.filter(function(bug) {
+                     return !bug.dateClosed;
+                }).map(function(bug) {
+                    return ('<td>' +
+                        bug.id +
+                        '</td><td><a class="editbug" href="' +
+                        bug.id +
+                        '">' +
                         bug.title +
                         '</a></td><td>' +
                         ((bug.assignedToUser && bug.assignedToUser.name) || 'Unassigned') +
@@ -23,26 +31,95 @@
                         '</td>'
                     );
                 }));
-            });
+            };
 
-            $('#editor').dialog({
+            $.getJSON('/api/bugs',
+                function(data, textStatus, jqXhr) {
+                    bugs = data;
+                    refreshTable();
+                });
+
+            $editor.dialog({
                 autoOpen: false,
                 maxWidth: 500,
                 width: 500,
                 height: 500
             });
+            $title = $('#title');
+            $description = $('#description');
 
             $('#addbug').on('click keydown',
-                function () {
+                function() {
                     editingBug = {};
-                    $('#editor').find('input').val('');
-                    $('#editor').dialog('open');
+                    $editor.dialog({ title: 'New bug' });
+                    $editor.find('input').val('');
+                    $description.val('');
+                    $editor.find('#dateOpened').text(new Date());
+                    $editor.dialog('open');
+                });
+
+            $bugstable.on('click keydown',
+                'a.editbug',
+                function() {
+                    var id = parseInt($(this).attr('href'));
+                    console.log('Editing ' + id);
+                    editingBug = bugs.filter(function(bug) { return bug.id === id; })[0];
+                    $editor.dialog({ title: 'Editing bug #' + id });
+                    $title.val(editingBug.title);
+                    $description.val(editingBug.description);
+                    $editor.find('#dateOpened').text(editingBug.dateOpened);
+                    $editor.find('#dateClosed').text(editingBug.dateClosed);
+                    $editor.dialog('open');
+                    return false;
                 });
 
             $('#canceledit').on('click keydown',
-                function () {
+                function() {
                     editingBug = null;
-                    $('#editor').dialog('close');
+                    $editor.dialog('close');
+                });
+
+            $('#savebug').on('click keydown',
+                function() {
+                    $editor.dialog('close');
+                    if (editingBug.id) {
+                        $.ajax('/api/bugs',
+                            {
+                                method: 'PUT',
+                                contentType: 'application/json',
+                                dataType: 'json',
+                                data: JSON.stringify({
+                                    id: editingBug.id,
+                                    title: $title.val(),
+                                    description: $description.val(),
+                                    dateOpened: editingBug.dateOpened,
+                                    dateClosed: editingBug.dateClosed,
+                                    assignedToUser: editingBug.assignedToUser
+                                }),
+                                success: function() {
+                                    editingBug.title = $title.val();
+                                    editingBug.description = $description.val();
+                                    editingBug = null;
+                                    refreshTable();
+                                }
+                            });
+                    } else {
+                        editingBug = null;
+                        $.ajax('/api/bugs',
+                            {
+                                method: 'POST',
+                                contentType: 'application/json',
+                                dataType: 'json',
+                                data: JSON.stringify({
+                                    title: $title.val(),
+                                    description: $description.val()
+                                }),
+                                success: function(jqXhr) {
+                                    bugs.push(jqXhr.responseJson);
+                                    refreshTable();
+                                }
+                            });
+                    }
                 });
         });
     </script>
@@ -53,10 +130,10 @@
 <div class="row">
     <table id="bugstable" class="table table-bordered table-striped">
         <thead>
-            <tr><th>Title</th><th>Assigned To</th><th>Status</th></tr>
+        <tr><th>#</th><th>Title</th><th>Assigned To</th><th>Status</th><th></th></th></tr>
         </thead>
         <tbody>
-        <td colspan="3">Loading...</td>
+        <td class="table-loading">Loading...</td>
         </tbody>
     </table>
 
@@ -75,6 +152,18 @@
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea rows="5" class="form-control" id="description" placeholder="Description"></textarea>
+                </div>
+            </div>
+            <div class="row col-5">
+                <div class="form-group">
+                    <label for="title">Date Opened</label>
+                    <p class="form-control-static" id="dateOpened"></p>
+                </div>
+            </div>
+            <div class="row col-5 hidden">
+                <div class="form-group">
+                    <label for="title">Date Closed</label>
+                    <p class="form-control-static" id="dateClosed"></p>
                 </div>
             </div>
 
